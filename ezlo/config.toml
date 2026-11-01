@@ -1,5 +1,20 @@
 # Ezlo configuration (~/.config/zsh/ezlo/config.toml)
 
+[specs]
+paths = [
+  "~/.config/zsh/ezlo/specs",
+  "~/.local/share/ezlo/specs"
+]
+
+[recipes]
+paths = [
+  "~/.config/zsh/ezlo/recipes"
+]
+
+[ui]
+show_descriptions = true
+preview_height = 10
+
 [complete.translate]
 # Disables comment/natural language translation prompt so ezlo never intercepts typed commands
 command = []

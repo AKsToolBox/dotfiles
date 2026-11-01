@@ -23,9 +23,13 @@ bindkey '^[d' kill-word                 # Alt+D -> Kill word forward
 bindkey '^U' backward-kill-line         # Ctrl+U -> Kill line backward (Bash style)
 
 # Shift+Enter -> Insert newline without running (multi-line buffer editing)
-bindkey '^[OM' self-insert-unmeta
-bindkey '^[[27;2;13~' self-insert-unmeta
-bindkey '^[[13;2u' self-insert-unmeta
+_insert_newline() {
+  LBUFFER+=$'\n'
+}
+zle -N _insert_newline
+bindkey '^[OM' _insert_newline
+bindkey '^[[27;2;13~' _insert_newline
+bindkey '^[[13;2u' _insert_newline
 
 # ---------------------------------------------------------
 # 2. FZF FILE PICKER
@@ -57,10 +61,17 @@ _ezlo_ai_query() {
   fi
 
   local original_query="$BUFFER"
+  local translate_bin="${commands[ezlo-ai-translate]:-$HOME/.local/bin/ezlo-ai-translate}"
+
+  if [[ ! -x "$translate_bin" ]]; then
+    zle -M "ezlo-ai-translate not found or not executable."
+    return
+  fi
+
   zle -M "Translating via Gemini API..."
 
   local translated_cmd
-  translated_cmd=$(~/.local/bin/ezlo-ai-translate "$original_query")
+  translated_cmd=$("$translate_bin" "$original_query")
 
   if [[ -n "$translated_cmd" ]]; then
     BUFFER="$translated_cmd"
@@ -73,3 +84,32 @@ _ezlo_ai_query() {
 zle -N _ezlo_ai_query
 bindkey '^[k' _ezlo_ai_query                  # Alt+K -> Translate prompt via Gemini API
 
+
+#-------------------------------------------------
+# 6. EZLO EXPLAIN: AUTOSAVE IMPORT USING SPEC_TOOL
+#-------------------------------------------------
+
+ezlo-add() {
+  if [[ -z "${1:-}" ]]; then
+    echo "Usage: ezlo-add <tool-name>" >&2
+    return 1
+  fi
+
+  if ! command -v ezlo >/dev/null 2>&1; then
+    echo "Error: ezlo binary not found in PATH." >&2
+    return 1
+  fi
+
+  ezlo import "$1" || return 1
+
+  local src="$HOME/.cache/ezlo/generated/${1}.ezlo"
+  local dest_dir="${EZLO_CONFIG_DIR:-${ZDOTDIR:-$HOME/.config/zsh}/ezlo}/specs"
+
+  mkdir -p "$dest_dir"
+  if [[ -f "$src" ]]; then
+    mv "$src" "$dest_dir/${1}.ezlo" && echo "Permanent spec saved: $dest_dir/${1}.ezlo"
+  else
+    echo "Error: Generated spec not found at $src" >&2
+    return 1
+  fi
+}

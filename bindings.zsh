@@ -8,13 +8,42 @@ bindkey -e
 # ---------------------------------------------------------
 # 1. WORD & CHARACTER NAVIGATION (Bash / Emacs Compatibility)
 # ---------------------------------------------------------
+# Forward one word; if ghost text is present at EOL, accepts exactly one word
+_forward_word_or_ghost_word() {
+  # 1. Ezlo partial ghost-text acceptance:
+  if [[ -n "${_ezlo_ghost:-}" && $CURSOR -eq ${#BUFFER} ]]; then
+    _ezlo_on_redraw 2>/dev/null || true
+    local -i orig_len=${#BUFFER}
+    BUFFER+="$_ezlo_ghost"
+    zle .forward-word
+    if (( CURSOR > orig_len )); then
+      BUFFER="${BUFFER[1,$CURSOR]}"
+    else
+      BUFFER="${BUFFER[1,$orig_len]}"
+    fi
+    _ezlo_on_redraw 2>/dev/null || true
+    zle -R 2>/dev/null || true
+    return
+  fi
+
+  # 2. zsh-autosuggestions fallback partial acceptance:
+  if (( $+widgets[autosuggest-accept] )) && [[ -n "${POSTDISPLAY:-}" && $CURSOR -eq ${#BUFFER} ]]; then
+    zle forward-word
+    return
+  fi
+
+  # 3. Standard cursor navigation: strictly one word forward
+  zle .forward-word
+}
+zle -N _forward_word_or_ghost_word
+
 bindkey '^F' .forward-char              # Ctrl+F -> strictly 1 char forward (never accepts ghost text)
 bindkey '^B' .backward-char             # Ctrl+B -> strictly 1 char backward
-bindkey '^[f' .forward-word             # Alt+F -> strictly 1 word forward (never accepts ghost text)
-bindkey '^[F' .forward-word             # Alt+Shift+F -> strictly 1 word forward
+bindkey '^[f' _forward_word_or_ghost_word     # Alt+F -> Forward 1 word / accept 1 ghost word at EOL
+bindkey '^[F' _forward_word_or_ghost_word     # Alt+Shift+F -> Forward 1 word / accept 1 ghost word at EOL
 bindkey '^[b' .backward-word            # Alt+B -> strictly 1 word backward
 bindkey '^[B' .backward-word            # Alt+Shift+B -> strictly 1 word backward
-bindkey '^[[1;5C' .forward-word         # Ctrl+Right -> strictly 1 word forward
+bindkey '^[[1;5C' _forward_word_or_ghost_word # Ctrl+Right -> Forward 1 word / accept 1 ghost word at EOL
 bindkey '^[[1;5D' .backward-word        # Ctrl+Left -> strictly 1 word backward
 bindkey '^[^?' backward-kill-word       # Alt+Backspace -> Kill word backward
 bindkey '^[[3;3~' backward-kill-word    # Alt+Backspace (alt sequence)

@@ -87,3 +87,4 @@ source "$ZDOTDIR/prompt.zsh"
 
 # Local machine secrets & overrides (Git-ignored)
 [[ -f "$ZDOTDIR/local.zsh" ]] && source "$ZDOTDIR/local.zsh"
+

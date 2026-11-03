@@ -81,6 +81,12 @@ alias pentest-ai='/vm-storage/AI/scripts/venv/bin/python /vm-storage/AI/scripts/
 alias pc-controls-mcp='/vm-storage/AI/scripts/venv/bin/python /vm-storage/AI/scripts/pc_controls_mcp.py'
 
 # =========================================================
+# OpenAkita Desktop
+# =========================================================
+
+alias openakita="/vm-storage/opt/openakita-desktop/launch.sh"
+
+# =========================================================
 # Safe Crisis Power-Down / Preservation
 # =========================================================
 

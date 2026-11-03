@@ -12,6 +12,9 @@ if command -v ezlo >/dev/null 2>&1; then
   # ---------------------------------------------------------
   # Key Mappings (Alt + & Ctrl +)
   # ---------------------------------------------------------
+  # Leave Tab and Shift-Tab untouched for native zsh & fzf completion
+  zstyle ':ezlo:keys' complete ''
+  zstyle ':ezlo:keys' complete-prev ''
   zstyle ':ezlo:keys' pick '^[r'        # Alt+R  : Recipe picker & parameter filler
   zstyle ':ezlo:keys' popup '^[p'       # Alt+P  : Settings popup menu (moved from Alt+E)
   zstyle ':ezlo:keys' explain '^[e'     # Alt+E  : Token explanation & diagnostics (moved from Alt+H)

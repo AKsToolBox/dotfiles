@@ -5,6 +5,9 @@
 # Establish native Bash/Emacs keymap as baseline
 bindkey -e
 
+# Treat '/' as a word delimiter so word motions, kills, and ghost acceptance operate one directory level at a time
+WORDCHARS="${WORDCHARS//\//}"
+
 # ---------------------------------------------------------
 # 1. WORD & CHARACTER NAVIGATION (Bash / Emacs Compatibility)
 # ---------------------------------------------------------

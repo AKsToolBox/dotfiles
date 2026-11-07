@@ -1,0 +1,78 @@
+# Debian/Ubuntu apt specification for ezlo
+
+cmd apt "Debian/Ubuntu package management tool"
+  opt -h --help "Show help message"
+  opt -v --version "Show version information"
+  opt -y --yes --assume-yes "Automatic yes to prompts"
+  opt -q --quiet "Quiet mode; produce output suitable for logging"
+  opt -s --simulate --just-print --dry-run "Simulate actions without modifying system"
+  opt --no-install-recommends "Do not treat recommended packages as dependencies"
+  opt --fix-broken -f "Attempt to correct broken dependencies"
+  opt --purge "Use purge instead of remove for nominated packages"
+  opt -t --target-release <release> "Target release (stable, testing, sid)"
+  opt -c --config-file <file> file "Configuration file to use"
+  opt -o --option <option> "Set a configuration option"
+
+  recipe "Update package lists and upgrade system"
+    $ apt update && apt upgrade -y
+
+  recipe "Search for a package"
+    $ apt search <package>
+
+  recipe "Show detailed package info"
+    $ apt show <package>
+
+  recipe "Install a package without recommended extras"
+    $ apt install --no-install-recommends <package>
+
+  recipe "Clean up orphaned dependencies"
+    $ apt autoremove --purge -y
+
+cmd apt list "List packages based on package names"
+  opt --installed "List installed packages only"
+  opt --upgradable "List upgradable packages only"
+  opt --all-versions "List all available versions"
+  arg [package...]
+
+cmd apt search "Search package names and descriptions"
+  opt --names-only "Only search package names"
+  arg <query>
+
+cmd apt show "Show detailed package information"
+  opt -a --all-versions "Show all versions"
+  arg <package...>
+
+cmd apt install "Install packages"
+  opt -y --yes "Automatic yes to prompts"
+  opt --no-install-recommends "Do not treat recommended packages as dependencies"
+  opt --reinstall "Reinstall packages that are already installed"
+  opt --only-upgrade "Do not install new packages; only upgrade existing ones"
+  arg <package...>
+
+cmd apt reinstall "Reinstall packages"
+  opt -y --yes "Automatic yes to prompts"
+  arg <package...>
+
+cmd apt remove "Remove packages"
+  opt -y --yes "Automatic yes to prompts"
+  opt --purge "Purge configuration files along with packages"
+  arg <package...>
+
+cmd apt autoremove "Automatically remove all unused packages"
+  opt -y --yes "Automatic yes to prompts"
+  opt --purge "Purge configuration files of unused packages"
+
+cmd apt update "Update list of available packages from repositories"
+  opt -q --quiet "Quiet mode"
+
+cmd apt upgrade "Upgrade the system by installing/upgrading packages"
+  opt -y --yes "Automatic yes to prompts"
+  opt --with-new-pkgs "Allow installing new packages when upgrading"
+
+cmd apt full-upgrade "Upgrade the system, removing packages if necessary"
+  opt -y --yes "Automatic yes to prompts"
+
+cmd apt edit-sources "Edit the package sources.list file"
+
+cmd apt satisfy "Satisfy dependency build and runtime strings"
+  arg <spec...>

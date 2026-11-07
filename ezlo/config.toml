@@ -1,5 +1,9 @@
 # Ezlo configuration (~/.config/zsh/ezlo/config.toml)
 
+[sources]
+# Exclude 'generated' tier so hollow scraped stubs never shadow native completions
+enabled = ["user", "bundled", "native"]
+
 [specs]
 paths = [
   "~/.config/zsh/ezlo/specs",

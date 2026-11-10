@@ -48,10 +48,20 @@ bindkey '^[b' .backward-word            # Alt+B -> strictly 1 word backward
 bindkey '^[B' .backward-word            # Alt+Shift+B -> strictly 1 word backward
 bindkey '^[[1;5C' _forward_word_or_ghost_word # Ctrl+Right -> Forward 1 word / accept 1 ghost word at EOL
 bindkey '^[[1;5D' .backward-word        # Ctrl+Left -> strictly 1 word backward
-bindkey '^[^?' backward-kill-word       # Alt+Backspace -> Kill word backward
-bindkey '^[[3;3~' backward-kill-word    # Alt+Backspace (alt sequence)
-bindkey '^[^H' backward-kill-word       # Alt+Backspace (alt sequence)
-bindkey '^[d' kill-word                 # Alt+D -> Kill word forward
+# Strictly kill backward to the preceding slash or space (one directory segment at a time)
+_backward_kill_dir() {
+  if [[ "$LBUFFER" =~ '(.*[/ ])[^/ ]+/*$' ]]; then
+    LBUFFER="${match[1]}"
+  else
+    zle .backward-kill-word
+  fi
+}
+zle -N _backward_kill_dir
+
+bindkey '^[^?' _backward_kill_dir          # Alt+Backspace -> Kill exactly 1 directory level
+bindkey '^[[3;3~' _backward_kill_dir       # Alt+Backspace (xterm sequence)
+bindkey '^[^H' _backward_kill_dir          # Alt+Backspace (rxvt/tmux sequence)
+bindkey '^[d' kill-word                    # Alt+D -> Kill word forward
 bindkey '^U' backward-kill-line         # Ctrl+U -> Kill line backward (Bash style)
 
 # Shift+Enter -> Insert newline without running (multi-line buffer editing)

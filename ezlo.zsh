@@ -26,6 +26,9 @@ if command -v ezlo >/dev/null 2>&1; then
   # Initialize ezlo integration
   eval "$(ezlo init zsh)"
 
+  # Explicitly preserve native Tab completion for directory and context
+  bindkey '^I' expand-or-complete
+
   # Revert Alt+H to native run-help and release Alt+J
   bindkey '^[h' run-help
   bindkey '^[H' run-help

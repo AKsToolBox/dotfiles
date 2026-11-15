@@ -1,0 +1,13 @@
+# Machine-local secrets and configurations (Git-ignored)
+# Copy this file to 'local.zsh' and add your private keys/configurations.
+
+# AI API Keys
+export GEMINI_API_KEY="your-gemini-api-key-here"
+export OPENROUTER_API_KEY="your-openrouter-api-key-here"
+export JINA_API_KEY="your-jina-api-key-here"
+
+# Custom Local PATH Additions
+# export PATH="$HOME/.local/bin:$PATH"
+
+# Machine-specific Aliases or Functions
+# alias work-vpn="sudo openvpn /path/to/config.ovpn"

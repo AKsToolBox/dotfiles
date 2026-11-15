@@ -14,9 +14,16 @@ alias tree='eza --tree --icons'
 compdef eza=ls
 
 # Better cat
-alias cat='batcat'
+if command -v batcat >/dev/null 2>&1; then
+  alias cat='batcat'
+elif command -v bat >/dev/null 2>&1; then
+  alias cat='bat'
+fi
 
-alias fd='fdfind'
+# Better fd
+if command -v fdfind >/dev/null 2>&1; then
+  alias fd='fdfind'
+fi
 
 # =========================================================
 # Core utilities

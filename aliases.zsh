@@ -14,15 +14,22 @@ alias tree='eza --tree --icons'
 compdef eza=ls
 
 # Better cat
-alias cat='batcat'
+if command -v batcat >/dev/null 2>&1; then
+  alias cat='batcat'
+elif command -v bat >/dev/null 2>&1; then
+  alias cat='bat'
+fi
 
-alias fd='fdfind'
+# Better fd
+if command -v fdfind >/dev/null 2>&1; then
+  alias fd='fdfind'
+fi
 
 # =========================================================
 # Core utilities
 # =========================================================
 
-alias grep='rg --color=auto'
+# alias grep='rg --color=auto'
 alias diff='diff --color=auto'
 alias df='df -h'
 
@@ -66,10 +73,40 @@ alias stream='mpv av://v4l2:/dev/video4 --fullscreen --demuxer-lavf-o=input_form
 # Antigravity / Haven MCP Notifications
 # =========================================================
 
-alias haven-notify='/vm-storage/pentest/Working/scripts/haven-notify.py'
+alias haven-notify='/vm-storage/haven-mcp/bin/haven-notify.py'
 
 # =========================================================
 # AI / Pentest Tools
 # =========================================================
 
 alias pentest-ai='/vm-storage/AI/scripts/venv/bin/python /vm-storage/AI/scripts/pentest_ai.py'
+
+# =========================================================
+# PC Controls MCP Server
+# =========================================================
+
+alias pc-controls-mcp='/vm-storage/AI/scripts/venv/bin/python /vm-storage/AI/scripts/pc_controls_mcp.py'
+
+# =========================================================
+# OpenAkita Desktop
+# =========================================================
+
+alias openakita="/vm-storage/opt/openakita-desktop/launch.sh"
+
+# =========================================================
+# AI Command Center / Local Qwen3-8B Agents
+# =========================================================
+
+alias local-chat='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode chat -i'
+alias local-audit='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified -p audit'
+alias local-sysadmin='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified -i'
+alias cc-agent='python3 /home/pandora/command-center/bin/cc_local_agent.py'
+
+# =========================================================
+# Safe Crisis Power-Down / Preservation
+# =========================================================
+
+alias safe-powerdown='bash /vm-storage/AI/scripts/safe_powerdown.sh'
+alias safe-powerdown-dry='bash /vm-storage/AI/scripts/safe_powerdown.sh --dry-run'
+alias safe-powerdown-5m='bash /vm-storage/AI/scripts/safe_powerdown.sh --delay 5'
+

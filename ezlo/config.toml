@@ -1,0 +1,24 @@
+# Ezlo configuration (~/.config/zsh/ezlo/config.toml)
+
+[sources]
+# Exclude 'generated' tier so hollow scraped stubs never shadow native completions
+enabled = ["user", "bundled", "native"]
+
+[specs]
+paths = [
+  "~/.config/zsh/ezlo/specs",
+  "~/.local/share/ezlo/specs"
+]
+
+[recipes]
+paths = [
+  "~/.config/zsh/ezlo/recipes"
+]
+
+[ui]
+show_descriptions = true
+preview_height = 10
+
+[complete.translate]
+# Disables comment/natural language translation prompt so ezlo never intercepts typed commands
+command = []

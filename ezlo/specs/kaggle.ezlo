@@ -1,0 +1,22 @@
+# Auto-generated spec for kaggle
+
+cmd kaggle "{competitions,c,datasets,d,kernels,k,models,m,files,forums,f,benchmarks,b,config,auth,quota,search} ..."
+  opt -h --help "show this help message and exit"
+  opt -v --version "Print the Kaggle CLI version"
+  opt -W --no-warn "Disable out-of-date API version warning"
+  opt --debug "Print the full traceback when an unexpected error occurs"
+
+cmd kaggle files "Commands related files"
+  arg [args...]
+
+cmd kaggle config "Configuration settings"
+  arg [args...]
+
+cmd kaggle auth "Commands related to authentication"
+  arg [args...]
+
+cmd kaggle quota "Show the current user's weekly GPU and TPU accelerator quota"
+  arg [args...]
+
+cmd kaggle search "Search across Kaggle competitions, datasets, notebooks, models, users, and discussions"
+  arg [args...]

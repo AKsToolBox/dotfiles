@@ -23,10 +23,13 @@ export GPG_TTY=$(tty)
 # ---------- Starship ----------
 export STARSHIP_CONFIG="$ZDOTDIR/starship.toml"
 
+# ---------- Ezlo ----------
+export EZLO_CONFIG_DIR="$ZDOTDIR/ezlo"
+
 # ---------- PATH ----------
 # Personal binaries/scripts & administrative sbin paths
 export GOPATH="${GOPATH:-$HOME/go}"
-export PATH="$HOME/.local/bin:$HOME/.gemini/bin:$GOPATH/bin:$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.gemini/bin:$GOPATH/bin:$PATH:/usr/local/sbin:/usr/sbin:/sbin"
 
 # ---------- Virtualization ----------
 export LIBVIRT_DEFAULT_URI="qemu:///system"

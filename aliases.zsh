@@ -66,7 +66,7 @@ alias stream='mpv av://v4l2:/dev/video4 --fullscreen --demuxer-lavf-o=input_form
 # Antigravity / Haven MCP Notifications
 # =========================================================
 
-alias haven-notify='/vm-storage/pentest/Working/scripts/haven-notify.py'
+alias haven-notify='/vm-storage/haven-mcp/bin/haven-notify.py'
 
 # =========================================================
 # AI / Pentest Tools
@@ -85,6 +85,15 @@ alias pc-controls-mcp='/vm-storage/AI/scripts/venv/bin/python /vm-storage/AI/scr
 # =========================================================
 
 alias openakita="/vm-storage/opt/openakita-desktop/launch.sh"
+
+# =========================================================
+# AI Command Center / Local Qwen3-8B Agents
+# =========================================================
+
+alias local-chat='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode chat -i'
+alias local-audit='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified -p audit'
+alias local-sysadmin='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified -i'
+alias cc-agent='python3 /home/pandora/command-center/bin/cc_local_agent.py'
 
 # =========================================================
 # Safe Crisis Power-Down / Preservation

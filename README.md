@@ -183,8 +183,10 @@ cd ~/.config/zsh
 - **AI Command Center Aliases**:
   ```sh
   local-chat       # Interactive terminal chat with local Qwen3-8B
-  local-audit      # Trigger deterministic netsec & system security audit
   local-sysadmin   # Interactive sysadmin assistant session
+  local-netsec     # Interactive network security analysis session
+  local-audit      # Autonomous system security audit
+  netsec           # Direct network security audit and hardening CLI
   cc-agent         # Direct entrypoint for AI Command Center local agent
   ```
 

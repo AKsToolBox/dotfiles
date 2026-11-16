@@ -39,16 +39,6 @@ alias df='df -h'
 
 alias -- -='cd -'  # -- prevents - being parsed as a flag; cd - jumps to previous directory
 
-lf() { # zsh follow lf navigation
-    tmp=$(mktemp)
-    command lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir=$(cat "$tmp")
-        rm -f "$tmp"
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
-}
-
 # =========================================================
 # Editor
 # =========================================================
@@ -64,28 +54,16 @@ alias gadog='PAGER="less -F -X" git log --all --decorate --oneline --graph'
 alias dotfiles='git -C "${ZDOTDIR:-$HOME/.config/zsh}"'
 
 # =========================================================
-# Video
-# =========================================================
-
-alias stream='mpv av://v4l2:/dev/video4 --fullscreen --demuxer-lavf-o=input_format=mjpeg,framerate=30 --profile=low-latency --untimed'
-
-# =========================================================
 # Antigravity / Haven MCP Notifications
 # =========================================================
 
 alias haven-notify='/vm-storage/haven-mcp/bin/haven-notify.py'
 
 # =========================================================
-# AI / Pentest Tools
-# =========================================================
-
-alias pentest-ai='/vm-storage/AI/scripts/venv/bin/python /vm-storage/AI/scripts/pentest_ai.py'
-
-# =========================================================
 # PC Controls MCP Server
 # =========================================================
 
-alias pc-controls-mcp='/vm-storage/AI/scripts/venv/bin/python /vm-storage/AI/scripts/pc_controls_mcp.py'
+alias pc-controls-mcp='/vm-storage/AI/pandora-framework-hud/openakita-env/bin/python3 /vm-storage/AI/pandora-framework-hud/scripts/pc_controls_mcp.py'
 
 # =========================================================
 # OpenAkita Desktop
@@ -97,16 +75,21 @@ alias openakita="/vm-storage/opt/openakita-desktop/launch.sh"
 # AI Command Center / Local Qwen3-8B Agents
 # =========================================================
 
-alias local-chat='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode chat -i'
-alias local-audit='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified -p audit'
-alias local-sysadmin='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified -i'
 alias cc-agent='python3 /home/pandora/command-center/bin/cc_local_agent.py'
+alias local-chat='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode chat -i'
+alias local-chat-new='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode chat --new -i'
+alias local-sysadmin='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode sysadmin -i'
+alias local-netsec='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode netsec -i'
+alias local-unified='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified -i'
+alias local-audit='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified -p audit'
+alias local-netsec-audit='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode netsec -p audit'
+alias netsec='python3 /home/pandora/command-center/bin/netsec_cli.py'
 
 # =========================================================
 # Safe Crisis Power-Down / Preservation
 # =========================================================
 
-alias safe-powerdown='bash /vm-storage/AI/scripts/safe_powerdown.sh'
-alias safe-powerdown-dry='bash /vm-storage/AI/scripts/safe_powerdown.sh --dry-run'
-alias safe-powerdown-5m='bash /vm-storage/AI/scripts/safe_powerdown.sh --delay 5'
+alias safe-powerdown='bash /home/pandora/command-center/bin/safe_powerdown.sh'
+alias safe-powerdown-dry='bash /home/pandora/command-center/bin/safe_powerdown.sh --dry-run'
+alias safe-powerdown-5m='bash /home/pandora/command-center/bin/safe_powerdown.sh --delay 5'
 

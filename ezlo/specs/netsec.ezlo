@@ -1,0 +1,19 @@
+# Ezlo spec for netsec (netsec_cli.py)
+
+cmd netsec "{audit,logs,harden,troubleshoot,report}"
+  opt -h --help "Show help message and exit"
+  opt --json "Output raw JSON format"
+
+cmd netsec audit "Inspect listening sockets, wildcards, PROMISC interfaces, and firewall posture"
+  opt --json "Output raw JSON format"
+
+cmd netsec logs "Parse journalctl SSH logs for brute-force and probing IPs"
+  opt --json "Output raw JSON format"
+
+cmd netsec harden "Audit Linux kernel sysctl parameters against CIS benchmarks"
+  opt --json "Output raw JSON format"
+
+cmd netsec troubleshoot "Diagnose L2 ARP, L3 IP routing, and DNS resolver health"
+  opt --json "Output raw JSON format"
+
+cmd netsec report "Compile unified Markdown threat analysis & posture report"

@@ -180,15 +180,17 @@ cd ~/.config/zsh
 
 - **Natural Language Translation**:
   Type a task in plain English on your command line and press `Alt+K`. The built-in widget queries Gemini API via `ezlo-ai-translate` and replaces your prompt with the executable command.
-- **AI Command Center Aliases**:
+- **AI Command Center Aliases (`titan-ai` & `netsec`)**:
   ```sh
-  local-chat       # Interactive terminal chat with local Qwen3-8B
-  local-sysadmin   # Interactive sysadmin assistant session
-  local-netsec     # Interactive network security analysis session
-  local-audit      # Autonomous system security audit
-  netsec           # Direct network security audit and hardening CLI
-  cc-agent         # Direct entrypoint for AI Command Center local agent
+  titan-ai       # Air-gapped local Qwen3-8B Host & NetSec Architect (unified)
+  titan-new      # Fresh titan-ai session without prior history
+  titan-audit    # One-shot deterministic host + network audit (GBNF telemetry)
+  titan-cloud    # Stateless, sanitized Gemini Cloud API escalation (no host tools)
+  local-chat     # General conversational chat with local Qwen3-8B (Mode A)
+  netsec         # Pure-Python deterministic network security CLI
+  cc-agent       # Direct entrypoint for cc_local_agent.py
   ```
+- **Pre-Commit Keybinding & Secret Guard**: `.git/hooks/pre-commit` deterministically blocks staging `local.zsh` or removing `Ctrl+P` / `Ctrl+N` native history bindings in `bindings.zsh`.
 
 ---
 

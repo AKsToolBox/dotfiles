@@ -1,0 +1,34 @@
+# Ezlo spec for titan-ai / cc-agent
+
+cmd titan-ai "Air-Gapped Local Qwen3-8B Host & NetSec Architect"
+  opt -h --help "Show help message and exit"
+  opt -p --prompt <text> "Run a one-shot prompt or 'audit' trigger"
+  opt -i --interactive "Launch interactive REPL session"
+  opt --new "Start a fresh session instead of auto-resuming"
+  opt --mode <mode> "Operating mode (unified|sysadmin|netsec|chat)"
+  opt --thermal <state> "Toggle GPU thermal guard (on|off)"
+  opt --no-thermal "Bypass GPU thermal guard for this run"
+  opt --cloud "Run stateless sanitized query via Gemini Cloud API"
+
+cmd titan-new "Start a fresh titan-ai interactive session"
+  opt -p --prompt <text> "Initial prompt"
+  opt --thermal <state> "Toggle GPU thermal guard (on|off)"
+  opt --no-thermal "Bypass GPU thermal guard"
+
+cmd titan-audit "Run one-shot deterministic host + netsec audit via titan-ai"
+  opt --thermal <state> "Toggle GPU thermal guard (on|off)"
+  opt --no-thermal "Bypass GPU thermal guard"
+
+cmd titan-cloud "Run stateless sanitized query via Gemini Cloud API"
+  opt -p --prompt <text> "Standalone sanitized question"
+  opt -i --interactive "Launch interactive cloud session"
+
+cmd cc-agent "Direct entrypoint for cc_local_agent.py"
+  opt -h --help "Show help message and exit"
+  opt --mode <mode> "Operating mode (chat|sysadmin|netsec|unified)"
+  opt -p --prompt <text> "One-shot prompt"
+  opt -i --interactive "Interactive REPL session"
+  opt --new "Start a fresh session"
+  opt --thermal <state> "Toggle GPU thermal guard (on|off)"
+  opt --no-thermal "Bypass GPU thermal guard"
+  opt --cloud "Run stateless sanitized query via Gemini Cloud API"

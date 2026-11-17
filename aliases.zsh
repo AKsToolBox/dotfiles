@@ -72,18 +72,16 @@ alias pc-controls-mcp='/vm-storage/AI/pandora-framework-hud/openakita-env/bin/py
 alias openakita="/vm-storage/opt/openakita-desktop/launch.sh"
 
 # =========================================================
-# AI Command Center / Local Qwen3-8B Agents
+# Titan-AI (Air-Gapped Host & NetSec Architect) & Command Center
 # =========================================================
 
-alias cc-agent='python3 /home/pandora/command-center/bin/cc_local_agent.py'
+alias titan-ai='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified -i'
+alias titan-new='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified --new -i'
+alias titan-audit='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified -p audit'
+alias titan-cloud='python3 /home/pandora/command-center/bin/cc_local_agent.py --cloud -i'
 alias local-chat='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode chat -i'
-alias local-chat-new='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode chat --new -i'
-alias local-sysadmin='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode sysadmin -i'
-alias local-netsec='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode netsec -i'
-alias local-unified='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified -i'
-alias local-audit='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode unified -p audit'
-alias local-netsec-audit='python3 /home/pandora/command-center/bin/cc_local_agent.py --mode netsec -p audit'
 alias netsec='python3 /home/pandora/command-center/bin/netsec_cli.py'
+alias cc-agent='python3 /home/pandora/command-center/bin/cc_local_agent.py'
 
 # =========================================================
 # Safe Crisis Power-Down / Preservation
